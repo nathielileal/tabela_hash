@@ -27,6 +27,33 @@ unsigned int funcaoHash(const char* nome) {
 }
 
 // Adicionar contato
+void adicionarContato() {
+    char nome[TAMANHO_NOME], telefone[15];
+
+    printf("Digite o nome: ");
+    scanf(" %49[^\n]s", nome);
+    printf("Digite o telefone: ");
+    scanf(" %14s", telefone);
+
+    unsigned int indice = funcaoHash(nome);
+
+    Contato* novoContato = (Contato*)malloc(sizeof(Contato));
+    strcpy(novoContato->nome, nome);
+    strcpy(novoContato->telefone, telefone);
+    novoContato->proximo = NULL;
+
+    if (tabelaHash[indice] == NULL) {
+        tabelaHash[indice] = novoContato;
+    } else {
+        Contato* atual = tabelaHash[indice];
+        while (atual->proximo != NULL) {
+            atual = atual->proximo;
+        }
+        atual->proximo = novoContato;
+    }
+
+    printf("Contato adicionado com sucesso!\n");
+}
 
 
 // Buscar contato
