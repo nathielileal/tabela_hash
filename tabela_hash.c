@@ -57,7 +57,25 @@ void adicionarContato() {
 
 
 // Buscar contato
+void buscarContato() {
+    char nome[TAMANHO_NOME];
 
+    printf("Digite o nome para buscar: ");
+    scanf(" %49[^\n]s", nome);
+
+    unsigned int indice = funcaoHash(nome);
+    Contato* atual = tabelaHash[indice];
+
+    while (atual != NULL) {
+        if (strcmp(atual->nome, nome) == 0) {
+            printf("Telefone de %s: %s\n", atual->nome, atual->telefone);
+            return;
+        }
+        atual = atual->proximo;
+    }
+
+    printf("Contato não encontrado.\n");
+}
 
 // Remover contato
 void removerContato() {
